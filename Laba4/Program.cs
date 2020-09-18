@@ -1,20 +1,23 @@
-﻿using System;
+using System;
 
 namespace Laba4
 {
 
     class Factory
     {
-        private static Factory _factoryInstance; // ссылка на объект класса
+        private static Factory _factoryInstance; // ссылка на объект класса принадлежит классу. Единственная. 
+        //То есть, мы не сможем создать новый экземпляр класса, сможем, но он работать не будет.
+        //Контроллирует количество экземпляров. Нарушение принципов SOLID один класс - одна ответственность
         private StorageDetails _factoryStorage; // ссылка на объект класса
 
-        // Закрытый конструктор
+        // Закрытый конструктор только единожды создадим.
         private Factory()
         {
             _factoryStorage = new StorageDetails(0, 2000);
         }
 
-        // Статический метод создания объекта Factory
+        // Статический метод создания объекта Factory. принадлежит классу, Factory.GetInstanceFactoy(), 
+        // SingleTon
         public static Factory GetInstanceFactory()
         {
             if (_factoryInstance == null)
@@ -164,7 +167,7 @@ namespace Laba4
             myFactory.GetStorageDetails(50);
             PrintInfoOfFactory(myFactory);
 
-            //Заполнить склад
+            // склад
             myFactory.AddStorageDetails(3000);
             PrintInfoOfFactory(myFactory);
 
